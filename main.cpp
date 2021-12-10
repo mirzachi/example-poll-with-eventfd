@@ -87,8 +87,8 @@ void deinitializeSignalHandler(std::unique_ptr<std::thread>&& signalHandlerThrea
     if (signalHandlerThread->joinable())
     {
         // send the SIGINT signal to signalHandlerThread if it exists
-        // allows shutting down the daemon without using Ctrl+C
-        // e.g. when loading of agents fails
+        // allows shutting down the program without using Ctrl+C
+        // stops signal thread
         auto ret = pthread_kill(signalHandlerThread->native_handle(), SIGINT);
         std::cout << "pthread_kill return: " << std::string(strerror(ret))  << std::endl;
         signalHandlerThread->join();
